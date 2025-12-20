@@ -3,3 +3,25 @@ springdoc:
     path: /swagger-ui.html
   api-docs:
     path: /v3/api-docs
+
+spring:
+  security:
+    user:
+      name: ${SECURITY_USER}
+      password: ${SECURITY_PASS}
+  rabbitmq:
+    host: ${RABBITMQ_HOST}
+    port: ${RABBITMQ_PORT}
+    username: ${RABBITMQ_USER}
+    password: ${RABBITMQ_PASS}
+
+    listener:
+      simple:
+        concurrency: 5
+        max-concurrency: 10
+        prefetch: 1
+        default-requeue-rejected: false
+
+app:
+  scan:
+    max-concurrent-scans: 5
