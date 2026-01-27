@@ -1,0 +1,18 @@
+{
+  "properties": [
+    {
+      "name": "app.scan.tools.nmap.timeout",
+      "type": "java.lang.String",
+      "description": "Description for app.scan.tools.nmap.timeout."
+    },
+    {
+      "name": "app.scan.tools.nuclei.timeout",
+      "type": "java.lang.String",
+      "description": "Description for app.scan.tools.nuclei.timeout."
+    },
+    {
+      "name": "app.scan.tools.nikto.timeout",
+      "type": "java.lang.String",
+      "description": "Description for app.scan.tools.nikto.timeout."
+    }
+  ] }

@@ -14,6 +14,7 @@ spring:
     port: ${RABBITMQ_PORT}
     username: ${RABBITMQ_USER}
     password: ${RABBITMQ_PASS}
+    connection-timeout: ${RABBITMQ_CONNECTION_TIMEOUT}
 
     listener:
       simple:
@@ -24,4 +25,10 @@ spring:
 
 app:
   scan:
-    max-concurrent-scans: 5
+    tools:
+      nmap:
+        timeout: ${NMAP_TIMEOUT}
+      nuclei:
+        timeout: ${NUCLEI_TIMEOUT}
+      nikto:
+        timeout: ${NIKTO_TIMEOUT}
