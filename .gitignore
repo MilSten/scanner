@@ -33,4 +33,5 @@ build/
 .vscode/
 
 # Ignore local configuration
-application-local.properties
+.env
+src/main/resources/application-local.yml
