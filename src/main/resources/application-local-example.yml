@@ -1,0 +1,31 @@
+spring:
+  security:
+    user:
+      name: my_security_user
+      password: my_security_password
+  rabbitmq:
+    host: my_host
+    port: 5672
+    username: my_rabbitmq_user
+    password: my_rabbitmq_user
+    connection-timeout: 30000
+
+  datasource:
+    url: jdbc:postgresql://my_host:5432/my_database
+    username: my_postgres_user
+    password: my_postgres_password
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+
+app:
+  scan:
+    tools:
+      nmap:
+        timeout: PT5M
+      nuclei:
+        timeout: PT5M
+      nikto:
+        timeout: PT5M

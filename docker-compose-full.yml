@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: scanner-app
+    cap_add:
+      - NET_RAW
+      - NET_ADMIN
+    volumes:
+      - nuclei_templates:/root/.nuclei-templates
+    ports:
+      - "8080:8080"
+    environment:
+      # Database
+      POSTGRES_DATABASE_URL_ENV: ${POSTGRES_DATABASE_URL}
+      POSTGRES_USER_ENV: ${POSTGRES_USER}
+      POSTGRES_PASS_ENV: ${POSTGRES_PASS}
+      POSTGRES_DB_ENV: ${POSTGRES_DB}
+      DDL: ${DDL}
+      SHOW_SQL: ${SHOW_SQL}
+
+      # RabbitMQ
+      RABBITMQ_HOST_ENV: ${RABBITMQ_HOST}
+      RABBITMQ_PORT_ENV: ${RABBITMQ_PORT}
+      RABBITMQ_USER_ENV: ${RABBITMQ_USER}
+      RABBITMQ_PASS_ENV: ${RABBITMQ_PASS}
+      RABBITMQ_CONNECTION_TIMEOUT: 30000
+      
+      # Security
+      SECURITY_USER: ${SECURITY_USER}
+      SECURITY_PASS: ${SECURITY_PASS}
+      
+      # Tool timeouts
+      NMAP_TIMEOUT_ENV: ${NMAP_TIMEOUT}
+      NUCLEI_TIMEOUT_ENV: ${NUCLEI_TIMEOUT}
+      NIKTO_TIMEOUT_ENV: ${NIKTO_TIMEOUT}
+      
+      # Spring profiles
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+      - postgres
+      - rabbitmq
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: scanner-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASS}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: scanner-rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  rabbitmq_data:
+  nuclei_templates:

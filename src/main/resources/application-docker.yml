@@ -1,0 +1,37 @@
+spring:
+  datasource:
+    url: ${POSTGRES_DATABASE_URL_ENV}
+    username: ${POSTGRES_USER_ENV}
+    password: ${POSTGRES_PASS_ENV}
+    name: ${POSTGRES_DB_ENV}
+  jpa:
+    hibernate:
+      ddl-auto: ${DDL}
+    show-sql: ${SHOW_SQL}
+
+  rabbitmq:
+    host: ${RABBITMQ_HOST_ENV}
+    port: ${RABBITMQ_PORT_ENV}
+    username: ${RABBITMQ_USER_ENV}
+    password: ${RABBITMQ_PASS_ENV}
+    connection-timeout: 30000
+
+    listener:
+      simple:
+        concurrency: 5
+        max-concurrency: 10
+        prefetch: 1
+        default-requeue-rejected: false
+app:
+  scan:
+    tools:
+      nmap:
+        timeout: ${NMAP_TIMEOUT_ENV}
+      nuclei:
+        timeout: ${NUCLEI_TIMEOUT_ENV}
+      nikto:
+        timeout: ${NIKTO_TIMEOUT_ENV}
+
+logging:
+  level:
+    com.pentest.scanner: INFO

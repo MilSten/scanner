@@ -23,6 +23,27 @@ spring:
         prefetch: 1
         default-requeue-rejected: false
 
+  application:
+    name: scanner
+
+  profiles:
+    active: local
+
+  datasource:
+    url: ${POSTGRES_DATABASE_URL}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASS}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: ${DDL}
+    show-sql: ${SHOW_SQL}
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+
 app:
   scan:
     tools:
@@ -32,3 +53,8 @@ app:
         timeout: ${NUCLEI_TIMEOUT}
       nikto:
         timeout: ${NIKTO_TIMEOUT}
+
+logging:
+  level:
+    org:
+      springframework.security: debug
