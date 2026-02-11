@@ -3,16 +3,16 @@
     {
       "name": "app.scan.tools.nmap.timeout",
       "type": "java.lang.String",
-      "description": "Description for app.scan.tools.nmap.timeout."
+      "description": "Таймаут выполнения для Nmap"
     },
     {
       "name": "app.scan.tools.nuclei.timeout",
       "type": "java.lang.String",
-      "description": "Description for app.scan.tools.nuclei.timeout."
+      "description": "Таймаут выполнения для Nuclei"
     },
     {
       "name": "app.scan.tools.nikto.timeout",
       "type": "java.lang.String",
-      "description": "Description for app.scan.tools.nikto.timeout."
+      "description": "Таймаут выполнения для Nikto"
     }
   ] }
